@@ -14,9 +14,7 @@
         </div>
       </div>
     </div>
-
-
-   
+    
 
     
     <div class="team-members">

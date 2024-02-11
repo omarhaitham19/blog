@@ -21,7 +21,7 @@
   </div>
   <form method="POST" action="" enctype="multipart/form-data">
     <div class="mb-3">
-        <label for="title" class="form-label">Title</label>
+        <label for="title" class="form-label">Titl</label>
         <input type="text" class="form-control" id="title" name="title" value="">
     </div>
     <div class="mb-3">
