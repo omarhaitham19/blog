@@ -48,7 +48,10 @@
               <p><?php echo $row['body'] ?></p>
               <p>Author: <?php echo $row['name'] ?></p>
               <div class="d-flex justify-content-center">
-                  <a href="editPost.php?id = <?php echo $id ?>" class="btn btn-success mr-3 "> Edit post</a>
+              <form action="editPost.php" method="GET">
+                    <input type="hidden" name="id" value="<?php echo $id ?>">
+                    <button type="submit" name="delete" class="btn btn-success mr-3">Edit post</button>
+                  </form>
               
                   <form action="handle/deletepost.php" method="post">
                     <input type="hidden" name="id" value="<?php echo $id ?>">

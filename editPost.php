@@ -1,3 +1,4 @@
+<?php require_once 'inc/connection.php' ?>
 <?php require_once 'inc/header.php' ?>
  <!-- Page Content -->
  <div class="page-heading products-heading header-text">
@@ -12,6 +13,25 @@
         </div>
       </div>
     </div>
+    <?php
+
+    if (isset($_GET['id'])) {
+      $id = $_GET['id'];
+      $query = "SELECT * from posts where id = $id";
+      $result = mysqli_query($con , $query);
+      if (mysqli_num_rows($result) == 1) {
+        $row = mysqli_fetch_assoc($result);
+      }else{
+        // header("location:index.php");
+      }
+    }else{
+      // header("location:index.php");
+    }
+    ?>
+
+
+
+
 
 <div class="container w-50 ">
 <div class="d-flex justify-content-center">
@@ -21,11 +41,11 @@
     <form method="POST" action="" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
-            <input type="text" class="form-control" id="title" name="title" value="">
+            <input type="text" class="form-control" id="title" name="title" value="<?php echo isset($row['title']) ? $row['title'] : null ?>">
         </div>
         <div class="mb-3">
             <label for="body" class="form-label">Body</label>
-            <textarea class="form-control" id="body" name="body" rows="5"></textarea>
+            <textarea class="form-control" id="body" name="body" rows="5"><?php echo isset($row['body']) ? $row['body'] : null ?></textarea>
         </div>
         <div class="mb-3">
             <label for="body" class="form-label">image</label>
