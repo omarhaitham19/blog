@@ -1,3 +1,6 @@
+<?php
+require_once "connection.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -64,9 +67,12 @@
               <li class="nav-item">
                 <a class="nav-link" href="#">العربية</a>
               </li>
+              <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
+              ?>
               <li class="nav-item">
-                <a class="nav-link" href="#">Logout</a>
+                <a class="nav-link" href="logout.php">Logout</a>
               </li>
+              <?php } ?>
             </ul>
           </div>
         </div>

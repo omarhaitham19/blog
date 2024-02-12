@@ -197,11 +197,6 @@ if (isset($_POST['submit'])) {
 }
 }
 
-
-
-
-
-
 ?>
 
         <form class="form" action="" method="post">

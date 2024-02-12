@@ -1,3 +1,6 @@
+<?php
+require_once "inc/connection.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -114,13 +117,67 @@
     </div>
     <div>
     <?php
+    function validate_input($input)
+    {
+        $input = trim($input);
+        $input = stripslashes($input);
+        $input = htmlspecialchars($input);
+        return $input;
+    }
+    
+    if (isset($_POST['submit'])) {
+      
+      $email = mysqli_real_escape_string($con, validate_input($_POST['email']));
+      $password = mysqli_real_escape_string($con, validate_input($_POST['password']));
+    
+      if (empty($email)) {
+          $errors['email'] = "Email is required";
+      }
+    
+      if (empty($password)) {
+          $errors['password'] = "Password is required";
+      }
+    
+      if (empty($errors)) {
+        $user_query = "SELECT * FROM `users` WHERE `email`='$email'";
+        $user_result = mysqli_query($con, $user_query);
+    
+        if (mysqli_num_rows($user_result) == 1) {
+            $user_data = mysqli_fetch_assoc($user_result);
+    
+            if ($user_data && password_verify($password, $user_data['password'])) {
+                    $_SESSION['email'] = $email;
+                    $t = "SELECT `id` FROM `users` WHERE `email` = '{$_SESSION['email']}'";
+                    $h = mysqli_query($con, $t);
+    
+                    if ($row = mysqli_fetch_assoc($h)) {
+                        $user_id = $row['id'];
+                        $_SESSION['user_id'] = $user_id;
+                        $_SESSION['loggedin'] = true;
+                        session_regenerate_id();
+                        header("location:index.php");
+                        exit();
+                    } else {
+                        echo "<script>alert('An Error occurred!');</script>";
+                    }
+                }else{
+                    echo "<script>alert('Invalid Credentials!!');</script>";
+                }
+            } else {
+                echo "<script>alert('Email does not exist!');</script>";
+            }   
+    }
+}
+
 ?>
 
         <form class="form" action="" method="post">
             
             <h3>Login Here</h3>
             <input placeholder="Enter Email" class="input" type="email" name="email" id=""value="">
+            <span style="color: red;"> <?php echo isset($errors['email']) ? $errors['email'] : null ?> </span>
             <input class="input" placeholder="Enter Password" type="password" name="password" id="">
+            <span style="color: red;"> <?php echo isset($errors['password']) ? $errors['password'] : null ?> </span>
             <button type="submit" name="submit">Login</button>
            
             
