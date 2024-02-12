@@ -52,7 +52,7 @@ if (mysqli_num_rows($result) > 0) {
                                 <p><?php echo $row['body'] . "..."; ?></p>
 
                                 <div class="d-flex justify-content-end">
-                                    <a href="viewPost.php" class="btn btn-info "> view</a>
+                                    <a href="viewPost.php?id=<?php echo $row['id']?>" class="btn btn-info ">view</a>
                                 </div>
 
                             </div>
