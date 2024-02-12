@@ -29,9 +29,6 @@
     }
     ?>
 
-
-
-    
     <div class="best-features about-features">
       <div class="container">
         <div class="row">
@@ -51,9 +48,12 @@
               <p><?php echo $row['body'] ?></p>
               <p>Author: <?php echo $row['name'] ?></p>
               <div class="d-flex justify-content-center">
-                  <a href="editPost.php?id = <?php echo $id ?>" class="btn btn-success mr-3 "> edit post</a>
+                  <a href="editPost.php?id = <?php echo $id ?>" class="btn btn-success mr-3 "> Edit post</a>
               
-                  <a href="deletePost.php?id = <?php echo $id ?>" class="btn btn-danger "> delete post</a>
+                  <form action="handle/deletepost.php" method="post">
+                    <input type="hidden" name="id" value="<?php echo $id ?>">
+                    <button type="submit" name="delete" class="btn btn-danger" onclick="alert('Are you sure?')">Delete</button>
+                  </form>
               </div>
             </div>
           </div>

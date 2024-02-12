@@ -45,7 +45,7 @@ if (mysqli_num_rows($result) > 0) {
                     ?>
                     <div class="col-md-4">
                         <div class="product-item">
-                            <a href="#"><img src="upload/<?php echo $row['image'] ?>" alt=""></a>
+                            <a href="#"><img src="upload/<?php echo $row['image'] ?>" width="100" height="200" alt=""></a>
                             <div class="down-content">
                                 <a href="#"><h4><?php echo $row['title']; ?></h4></a>
                                 <h6><?php echo $row['created_at']; ?></h6>
