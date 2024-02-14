@@ -72,7 +72,12 @@ require_once "connection.php";
               <li class="nav-item">
                 <a class="nav-link" href="logout.php">Logout</a>
               </li>
-              <?php } ?>
+              <?php }else{
+                ?>
+                <li class="nav-item">
+                <a class="nav-link" href="login.php">Login</a>
+              </li>
+             <?php } ?>
             </ul>
           </div>
         </div>

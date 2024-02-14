@@ -1,4 +1,9 @@
 <?php require_once 'inc/connection.php' ?>
+<?php
+if (!isset($_SESSION['user_id'])) {
+  header("location:login.php");
+}
+?>
 <?php require_once 'inc/header.php' ?>
 
     <!-- Page Content -->
@@ -59,7 +64,7 @@
         if (empty($errors)) {
             $imgNewName = uniqid() . "_" .  basename($img_name);
             $query = "INSERT INTO `posts`( `title`, `image`, `body`, `user_id`) 
-            VALUES ('$title','$imgNewName','$body',1)";
+            VALUES ('$title','$imgNewName','$body',{$_SESSION['user_id']})";
             $runQuery = mysqli_query($con , $query);
             
             if ($runQuery) {

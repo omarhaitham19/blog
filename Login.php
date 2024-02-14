@@ -111,7 +111,7 @@ require_once "inc/connection.php";
 <body>
     <div class="nav">
         <div class="links">
-            <a href="Login.php">Log in</a>
+            <a href="index.php">Home</a>
             <!-- <a href="Register.php">Register</a> -->
         </div>
     </div>
