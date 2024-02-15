@@ -1,48 +1,63 @@
-<?php require_once 'inc/connection.php' ?>
-<?php require_once 'inc/header.php' ?>
+<?php
+require_once 'inc/connection.php';
+require_once 'inc/header.php';
 
-<!-- Page Content -->
-<!-- Banner Starts Here -->
+
+?>
 <div class="banner header-text">
     <div class="owl-banner owl-carousel">
         <div class="banner-item-01">
             <div class="text-content">
-                <!-- <h4>Best Offer</h4> -->
-                <!-- <h2>New Arrivals On Sale</h2> -->
+             
             </div>
         </div>
         <div class="banner-item-02">
             <div class="text-content">
-                <!-- <h4>Flash Deals</h4> -->
-                <!-- <h2>Get your best products</h2> -->
+               
             </div>
         </div>
         <div class="banner-item-03">
             <div class="text-content">
-                <!-- <h4>Last Minute</h4> -->
-                <!-- <h2>Grab last minute deals</h2> -->
+             
             </div>
         </div>
     </div>
 </div>
 
 <?php
-$query = "SELECT `id`, `title`, `image`, SUBSTRING(`body`, 1, 53) AS body, `created_at` FROM `posts`";
+$limit = 3;
+if (isset($_GET['page'])) {
+    $page = $_GET['page'];
+} else {
+    $page = 1;
+}
+
+$total_records_query = "SELECT COUNT(*) as total FROM `posts`";
+$total_records_result = mysqli_query($con, $total_records_query);
+$total_records = mysqli_fetch_assoc($total_records_result)['total'];
+$total_pages = ceil($total_records / $limit);
+
+if ($page > $total_pages || $page < 0) {
+    header("location:index.php");
+    exit(); 
+}
+
+$offset = ($page - 1) * $limit;
+
+$query = "SELECT `id`, `title`, `image`, SUBSTRING(`body`, 1, 53) AS body, `created_at` FROM `posts` LIMIT $limit OFFSET $offset";
 $result = mysqli_query($con, $query);
-if (mysqli_num_rows($result) > 0) {
-    ?>
+?>
+
+<?php if (mysqli_num_rows($result) > 0) : ?>
     <div class="latest-products">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="section-heading">
                         <h2>Latest Posts</h2>
-                        <!-- <a href="products.html">view all products <i class="fa fa-angle-right"></i></a> -->
                     </div>
                 </div>
-                <?php
-                while ($row = mysqli_fetch_assoc($result)) {
-                    ?>
+                <?php while ($row = mysqli_fetch_assoc($result)) : ?>
                     <div class="col-md-4">
                         <div class="product-item">
                             <a href="#"><img src="upload/<?php echo $row['image'] ?>" width="100" height="200" alt=""></a>
@@ -52,33 +67,37 @@ if (mysqli_num_rows($result) > 0) {
                                 <p><?php echo $row['body'] . "..."; ?></p>
 
                                 <div class="d-flex justify-content-end">
-                                    <a href="viewPost.php?id=<?php echo $row['id']?>" class="btn btn-info ">view</a>
+                                    <a href="viewPost.php?id=<?php echo $row['id'] ?>" class="btn btn-info ">view</a>
                                 </div>
-
                             </div>
                         </div>
                     </div>
-                    <?php
-                }
-                ?>
+                <?php endwhile; ?>
             </div>
         </div>
     </div>
-    <?php
-} else {
-    $msg = "No posts found";
-    echo $msg; 
-}
-?>
-<div class="container d-flex justify-content-center" >
-<nav aria-label="Page navigation example">
-  <ul class="pagination">
-    <li class="page-item"><a class="page-link text-danger" href="#">Previous</a></li>
-    <li class="page-item"><a class="page-link" href="#">Page of 1</a></li>
-    <li class="page-item"><a class="page-link text-success" href="#">Next</a></li>
-  </ul>
-</nav>
+<?php else : ?>
+    <div class="container">
+        <p>No posts found</p>
+    </div>
+<?php endif; ?>
+
+<div class="container d-flex justify-content-center">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <?php if ($page > 1) : ?>
+                <li class="page-item"><a class="page-link text-danger" href="?page=<?php echo ($page - 1); ?>">Previous</a></li>
+            <?php endif; ?>
+
+            <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
+                <li class="page-item"><a class="page-link<?php echo ($i == $page) ? " active" : ""; ?>" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+            <?php endfor; ?>
+
+            <?php if ($page < $total_pages) : ?>
+                <li class="page-item"><a class="page-link text-success" href="?page=<?php echo ($page + 1); ?>">Next</a></li>
+            <?php endif; ?>
+        </ul>
+    </nav>
 </div>
 
-
-<?php require_once 'inc/footer.php' ?>
+<?php require_once 'inc/footer.php'; ?>
