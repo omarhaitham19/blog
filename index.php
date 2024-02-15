@@ -70,5 +70,15 @@ if (mysqli_num_rows($result) > 0) {
     echo $msg; 
 }
 ?>
+<div class="container d-flex justify-content-center" >
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link text-danger" href="#">Previous</a></li>
+    <li class="page-item"><a class="page-link" href="#">Page of 1</a></li>
+    <li class="page-item"><a class="page-link text-success" href="#">Next</a></li>
+  </ul>
+</nav>
+</div>
+
 
 <?php require_once 'inc/footer.php' ?>
