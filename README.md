@@ -4,7 +4,7 @@ Welcome to the Blog Web App repository! This web application allows users to man
 
 ## Features
 
-- **Create:** Users can create new blog posts, adding title, body, and any additional information.
+- **Create:** Users can create new blog posts, adding title, body, and image.
 
 - **Read:** Visitors can view existing blog posts, exploring various topics and insights shared by the community.
 
@@ -12,11 +12,6 @@ Welcome to the Blog Web App repository! This web application allows users to man
 
 - **Delete:** Unwanted or outdated posts can be removed by their respective authors.
 
-## Technologies Used
-
-- **Frontend:** HTML, CSS, JavaScript
-- **Backend:** [Insert Backend Technology/Framework]
-- **Database:** [Insert Database Technology]
 
 ## Setup Instructions
 
