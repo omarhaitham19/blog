@@ -61,12 +61,6 @@ require_once "connection.php";
               <li class="nav-item">
                 <a class="nav-link" href="addPost.php">Add New Post</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">English</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">العربية</a>
-              </li>
               <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
               ?>
               <li class="nav-item">
