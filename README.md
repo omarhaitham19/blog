@@ -15,13 +15,13 @@ Welcome to the Blog Web App repository! This web application allows users to man
 
 ## Getting Started
 
-To run the Online Clothing Store locally, follow these steps:
+To run the project, follow these steps:
 
 1. Clone the repository.
 2. Set up the database using the provided SQL schema.
 
    - Navigate to the `database` folder.
-   - Import the SQL schema file (`hagahelwa.sql`) into your MySQL database.
+   - Import the SQL schema file (`blog.sql`) into your MySQL database.
    - Update the database connection details in `connection.php` with your MySQL credentials.
   
 3. Run the application using a PHP server.
