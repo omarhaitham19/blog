@@ -13,10 +13,15 @@ Welcome to the Blog Web App repository! This web application allows users to man
 - **Delete:** Unwanted or outdated posts can be removed by their respective authors.
 
 
-## Setup Instructions
+## Getting Started
 
-1. Clone the repository:
+To run the Online Clothing Store locally, follow these steps:
 
-   ```bash
-   git clone https://github.com/your-username/blog-web-app.git
+1. Clone the repository.
+2. Set up the database using the provided SQL schema.
 
+   - Navigate to the `database` folder.
+   - Import the SQL schema file (`hagahelwa.sql`) into your MySQL database.
+   - Update the database connection details in `connection.php` with your MySQL credentials.
+  
+3. Run the application using a PHP server.
