@@ -17,7 +17,7 @@
     <?php
     if (isset($_GET['id'])) {
       $id = $_GET['id'];
-      $query = "SELECT users.name , posts.* from users join posts on users.id = posts.user_id where posts.id = $id";
+      $query = "SELECT users.name , users.id as userID , posts.* from users join posts on users.id = posts.user_id where posts.id = $id";
       $result = mysqli_query($con , $query);
       if (mysqli_num_rows($result) == 1) {
         $row = mysqli_fetch_assoc($result);
@@ -28,7 +28,6 @@
       header("location:index.php");
     }
     ?>
-
     <div class="best-features about-features">
       <div class="container">
         <div class="row">
@@ -48,7 +47,7 @@
               <p><?php echo $row['body'] ?></p>
               <p>Author: <?php echo $row['name'] ?></p>
               <?php
-              if (isset($_SESSION['user_id'])) {
+              if (isset($_SESSION['user_id']) && isset($row['userID']) && $_SESSION['user_id'] == $row['userID']) {
                 ?>
               <div class="d-flex justify-content-center">
               <form action="editPost.php" method="GET">
@@ -67,5 +66,4 @@
         </div>
       </div>
 </div>
-
     <?php require_once 'inc/footer.php' ?>
